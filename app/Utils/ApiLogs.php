@@ -9,6 +9,7 @@
 namespace App\Utils;
 
 
+use DateTime;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use MongoDB\BSON\UTCDateTime;
@@ -22,6 +23,8 @@ class ApiLogs
 
     public static function writeRequest($request){
 
+        if(!config('app.api_logs')) return;
+
         static::$timestart = microtime(true);
 
         $collection = (new Client)->latifa->logs;
@@ -32,7 +35,7 @@ class ApiLogs
                 "env"       => config("app.env", "local"),
                 "request"   => $request->all(),
                 "header"    => $request->header(),
-                "timestamp_request" => new UTCDateTime(strtotime(date('Y-m-d H:i:s'))),
+                "timestamp_request" => new \MongoDB\BSON\UTCDateTime(new DateTime()),
                 "ip"        => $request->ip(),
             ]);
 
@@ -43,6 +46,8 @@ class ApiLogs
      * @param Response $response
      */
     public static function writeResponse($response){
+
+        if(!config('api_logs')) return;
 
         $collection = (new Client)->latifa->logs;
 
@@ -56,7 +61,7 @@ class ApiLogs
             ['$set' => [
                 "user_id"   => $userId,
                 'response' => $response,
-                "timestamp_response" => new UTCDateTime(strtotime(date('Y-m-d H:i:s'))),
+                "timestamp_response" => new \MongoDB\BSON\UTCDateTime(new DateTime()),
                 "execution_time" => microtime(true) -  static::$timestart
             ]]
         );

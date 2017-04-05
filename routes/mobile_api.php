@@ -5,6 +5,7 @@
  * Date: 3/4/17
  * Time: 10:14 PM
  */
+$api->get("/boot", 'App\Http\Controllers\Boot\BootController@index');
 
 $api->group(['prefix'=>'v1', "middleware" => ['App\Http\Middleware\AfterResponse', 'App\Http\Middleware\BeforeRequest']], function ($api){
 
@@ -45,11 +46,22 @@ $api->group(['prefix'=>'v1', "middleware" => ['App\Http\Middleware\AfterResponse
         $api->post('/cart/location', 'App\Http\Controllers\Cart\CartController@location');
         $api->post('/cart/date', 'App\Http\Controllers\Cart\CartController@date');
         $api->post('/cart/voucher', 'App\Http\Controllers\Cart\CartController@voucher');
+        $api->post('/cart/payment', 'App\Http\Controllers\Cart\CartController@payment');
         $api->post('/cart/remove_voucher', 'App\Http\Controllers\Cart\CartController@removeVoucher');
 
         /** ORDER ROUTES */
 
         $api->post('/checkout', 'App\Http\Controllers\Order\OrderController@checkout');
+        $api->get('/order', 'App\Http\Controllers\Order\OrderController@allOrder');
+        $api->post('/order/detail', 'App\Http\Controllers\Order\OrderController@detail');
+
+
+        /** PAYMENT ROUTES */
+        $api->post('/payment/channel', 'App\Http\Controllers\Payment\PaymentController@channel');
+        $api->post('/payment/proses', 'App\Http\Controllers\Payment\PaymentController@proses');
+        $api->post('/payment/confirmation', 'App\Http\Controllers\Payment\PaymentController@confirmation');
+        $api->get('/payment/additional_data/{channelId}', 'App\Http\Controllers\Payment\PaymentController@getAdditionalData');
+
     });
 
 });

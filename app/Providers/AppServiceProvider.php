@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repository\Cart\CartRepo;
 use App\Repository\Order\OrderRepo;
+use App\Repository\Payment\PaymentRepo;
 use App\Repository\ProductService\ProductServiceRepo;
 use App\Repository\Wallet\WalletRepo;
 use Illuminate\Support\ServiceProvider;
@@ -52,6 +53,12 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
+        $this->app->bind('App\Repository\Payment\PaymentInterface', function(){
+
+            return new PaymentRepo();
+
+        });
+
     }
 
     /**
@@ -66,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Repository\ProductService\ProductServiceInterface',
             'App\Repository\Cart\CartInterface',
             'App\Repository\Order\OrderInterface',
+            'App\Repository\Payment\PaymentInterface',
         ];
     }
 }

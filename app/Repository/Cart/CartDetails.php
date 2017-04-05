@@ -9,20 +9,40 @@
 namespace App\Repository\Cart;
 
 
+use App\Repository\Order\Data\Items;
+use App\Repository\Order\Data\Location;
+use App\Repository\Order\Data\Payment;
+use App\Repository\Order\Data\Voucher;
+
 class CartDetails
 {
-    public $_id;
-    public $userId;
+
+    public $user_id;
+
+    /** @var Items[] $items */
     public $items = [];
-    public $subtotal = 0;
+
+    public $fee = [
+        [
+            'label' => 'subtotal',
+            'value' => 0
+        ]
+    ];
+
     public $total = 0;
-    public $location = null;
-    public $date     = null;
+
+    /** @var Voucher $voucher  */
     public $voucher = null;
 
-    public function __construct($userId)
-    {
-        $this->userId = $userId;
-        $this->_id   = $userId;
-    }
+    /** @var Location $location */
+    public $location = null;
+
+    public $schedule = null;
+
+    /** @var Payment $payment */
+    public $payment = null;
+
+    public $unique_code = 0;
+
+    public $note = '';
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository\Cart;
+use App\Repository\Order\Data\Items;
 use App\Repository\Order\OrderInterface;
 use MongoDB\Client;
 
@@ -13,22 +14,4 @@ use MongoDB\Client;
 interface CartInterface
 {
 
-    public function init($userId);
-
-    public function countTotal();
-
-    public function add($product, $qty);
-
-    public function getCart();
-
-    public function location($data);
-
-    public function date($data);
-
-    public function voucher($voucherCode);
-
-    public function removeVoucher();
-
-    public function destroy();
-    
 }

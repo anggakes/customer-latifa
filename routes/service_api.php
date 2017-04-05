@@ -21,5 +21,12 @@ $api->group(['prefix'=>'web_service', "middleware" => []], function ($api){
 
 
 
+    $api->post('payment/notify', 'App\Http\Controllers\Payment\PaymentServiceController@notify');
+
+
+    $api->post('order/therapist', 'App\Http\Controllers\Order\OrderServiceController@therapist');
+
+
+
 
 });

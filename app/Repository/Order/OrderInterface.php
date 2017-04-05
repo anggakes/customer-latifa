@@ -14,14 +14,6 @@ use App\Repository\Cart\CartInterface;
 interface OrderInterface
 {
 
-    public function checkout($userId, CartInterface $cart);
 
-    public function cancel($orderId);
-
-    public function nextStatus($orderId);
-
-    public function addService($orderId, $data);
-
-    public function get($orderId);
 
 }

@@ -9,8 +9,11 @@
 namespace App\Repository\Order;
 
 
+use App\Repository\Order\Data\Status;
+
 class OrderStatus
 {
+
 
     const STATUS = [
         [
@@ -34,29 +37,42 @@ class OrderStatus
         [
             'id'                => 'THERAPIST_ON_THE_WAY',
             "label_customer"    => 'Terapis sedang menuju lokasi Anda',
-            "label_therapist"   => 'Menuju lokasi',
+            "label_therapist"   => 'Mulai Perjalanan',
             'index'             => 4
         ],
         [
             'id'                => 'SERVICES_START',
-            "label_customer"    => 'Layanan di mulai',
-            "label_therapist"   => 'mulai layanan',
+            "label_customer"    => 'Layanan di Mulai',
+            "label_therapist"   => 'Mulai Pelayanan',
             'index'             => 5
         ],
         [
             'id'                => 'SERVICES_FINISHED',
-            "label"             => 'Layanan selesai',
-            "label_therapist"   => 'layanan selesai',
+            "label_customer"    => 'Layanan Selesai',
+            "label_therapist"   => 'Layanan Selesai',
             'index'             => 6
         ]
     ];
 
+    /**
+     * @return Data\OrderStatus
+     */
     public function getInitStatus(){
-        return self::STATUS[0];
+        return new \App\Repository\Order\Data\OrderStatus(self::STATUS[0]);
     }
 
-    public function getNextStatus(){
+    public function getNextStatus($id){
 
+        $status = $this->getStatus($id);
+        return self::STATUS[$status['index']+1];
+
+    }
+
+    public function getStatus($id){
+
+        foreach (self::STATUS as $status){
+            if($status['id'] == $id) return $status;
+        }
     }
 
 }

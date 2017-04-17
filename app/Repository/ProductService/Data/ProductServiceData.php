@@ -37,7 +37,7 @@ class ProductServiceData
             $categories[] = new ProductServiceCategory($cat);
         }
 
-        $mediaItems = $data->getMedia();
+        $mediaItems = $data->getMedia('service_product');
 
         $images = [];
         foreach ($mediaItems as $image){

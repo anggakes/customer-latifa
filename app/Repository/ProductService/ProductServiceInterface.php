@@ -13,7 +13,7 @@ interface ProductServiceInterface
 {
     public function getAll();
 
-    public function create($data);
+    public function create($data, $images);
 
     public function update($id, $data);
 

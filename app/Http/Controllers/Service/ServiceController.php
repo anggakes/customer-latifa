@@ -26,9 +26,8 @@ class ServiceController extends Controller
 
         ProductService::$isConvertPoint = true;
 
-        return $this->service->getAll(($page-1)*$limit,$limit);
+        return response()->json($this->service->getAll(($page-1)*$limit,$limit));
     }
-
 
     public function store(){
 
@@ -39,7 +38,7 @@ class ServiceController extends Controller
             throw new BadRequestHttpException($validator->getMessageBag()->first());
         }
 
-        return $this->service->create($data);
+        return $this->service->create($data, request()->file('images'));
 
     }
 

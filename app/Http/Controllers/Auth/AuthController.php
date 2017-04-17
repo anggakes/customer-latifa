@@ -44,7 +44,7 @@ class AuthController extends Controller
     public function login(Request $request){
         if($request->has("email")){
             $credentials = $request->only('email', 'password');
-        }if($request->has("handphone")){
+        }elseif($request->has("handphone")){
             $credentials = $request->only('handphone', 'password');
         }else{
             throw new BadRequestHttpException("Email/ponsel tidak boleh Kosong");

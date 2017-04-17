@@ -30,7 +30,10 @@ class BootController extends Controller
 
         $data = [
             "banners" => $banners,
-            "password" => ($user) ? $user->password : "",
+            "is_update" => false,
+            "text" => [
+                'thank_you' => "Terima Kasih Order anda sedang d proses"
+            ]
         ];
 
         return $data;

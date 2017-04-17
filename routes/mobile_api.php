@@ -54,6 +54,9 @@ $api->group(['prefix'=>'v1', "middleware" => ['App\Http\Middleware\AfterResponse
         $api->post('/checkout', 'App\Http\Controllers\Order\OrderController@checkout');
         $api->get('/order', 'App\Http\Controllers\Order\OrderController@allOrder');
         $api->post('/order/detail', 'App\Http\Controllers\Order\OrderController@detail');
+        $api->post('order/status/finished', 'App\Http\Controllers\Order\OrderController@finished');
+        $api->post('order/rating_review', 'App\Http\Controllers\Order\OrderController@ratingAndReview');
+
 
 
         /** PAYMENT ROUTES */

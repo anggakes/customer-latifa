@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Order;
 
+use App\Models\RatingAndReview;
 use App\Repository\Cart\CartInterface;
 use App\Repository\Order\Data\Location;
 use App\Repository\Order\OrderInterface;
@@ -74,12 +75,21 @@ class OrderController extends Controller
 
     }
 
-    public function rateAndReview(){
+    public function ratingAndReview(){
         
         $invoiceNumber = request('invoice_number');
-        $star = request('star');
+        $rating = request('rating');
         $review = request('review');
+        $userId = request()->user()->id;
+
+        $reviewRating = new RatingAndReview([
+            'invoice_number' => $invoiceNumber,
+            'rating' => $rating,
+            'review' => $review,
+            'user_id' => $userId
+        ]);
 
 
+        return $reviewRating;
     }
 }

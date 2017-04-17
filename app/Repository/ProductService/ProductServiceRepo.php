@@ -11,6 +11,7 @@ namespace App\Repository\ProductService;
 
 use App\Models\Category;
 use App\Models\ProductService;
+use App\Repository\ProductService\Data\ProductServiceData;
 
 class ProductServiceRepo implements ProductServiceInterface
 {
@@ -24,16 +25,26 @@ class ProductServiceRepo implements ProductServiceInterface
 
     public function getAll($offset = 0, $limit = 10)
     {
-        return ProductService::with('categories')->limit($limit)->offset($offset)->get();
+        $services = ProductService::with('categories')->limit($limit)->offset($offset)->get();
+        $newFormat = [];
+        foreach ($services as $service){
+            $newFormat[] = new ProductServiceData($service);
+        }
+        return $newFormat;
     }
 
-    public function create($data)
+    public function create($data, $images)
     {
         $product = ProductService::create($data);
 
         if($data['category']){
             $product->categories()->attach($data['category']);
         }
+
+        foreach (request()->file('images') as $image){
+            $product->addMedia($image)->toMediaCollection('service_product');
+        }
+
 
         return $this->detail($product->service_id);
     }

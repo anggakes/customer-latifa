@@ -27,6 +27,12 @@ $api->group(['prefix'=>'web_service', "middleware" => []], function ($api){
     $api->post('order/therapist', 'App\Http\Controllers\Order\OrderServiceController@therapist');
 
 
+    $api->post('order/status/ontheway', 'App\Http\Controllers\Order\OrderServiceController@ontheway');
+    $api->post('order/status/start', 'App\Http\Controllers\Order\OrderServiceController@start');
+    $api->post('order/status/findtherapist', 'App\Http\Controllers\Order\OrderServiceController@findTherapist');
+    $api->post('order/get', 'App\Http\Controllers\Order\OrderServiceController@getOrder');
+
+
 
 
 });

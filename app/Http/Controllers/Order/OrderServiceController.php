@@ -49,4 +49,18 @@ class OrderServiceController extends Controller
         return response()->json($order->getOrder($invoiceNumber));
     }
 
+    public function findTherapist(OrderInterface $order){
+        $invoiceNumber = request('invoice_number');
+
+        $order->updateStatus($invoiceNumber, [], 'FIND_THERAPIST');
+
+        return response()->json($order->getOrder($invoiceNumber));
+    }
+
+    public function getOrder(OrderInterface $order){
+        $invoiceNumber = request('invoice_number');
+
+        return response()->json($order->getOrder($invoiceNumber));
+    }
+
 }

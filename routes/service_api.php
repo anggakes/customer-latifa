@@ -33,6 +33,9 @@ $api->group(['prefix'=>'web_service', "middleware" => []], function ($api){
     $api->post('order/get', 'App\Http\Controllers\Order\OrderServiceController@getOrder');
 
 
+    $api->post('banner/store', 'App\Http\Controllers\Banner\BannerController@store');
+
+
 
 
 });

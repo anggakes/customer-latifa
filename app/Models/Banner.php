@@ -11,6 +11,10 @@ class Banner extends Model implements HasMedia
     //
     use HasMediaTrait;
 
+    protected $fillable = [
+        "start","end",'url','label'
+    ];
+
     public static function getActiveBanners($simple = true){
         $data = self::all();
         foreach ($data as $key=>$val){
@@ -18,6 +22,8 @@ class Banner extends Model implements HasMedia
             $data[$key]->url = $banner;
             if($simple){
                 unset($data[$key]->media);
+                unset($data[$key]->start);
+                unset($data[$key]->end);
                 unset($data[$key]->created_at);
                 unset($data[$key]->updated_at);
             }

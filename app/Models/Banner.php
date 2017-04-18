@@ -19,7 +19,7 @@ class Banner extends Model implements HasMedia
         $data = self::all();
         foreach ($data as $key=>$val){
             $banner = url($val->getMedia('banners')[0]->getUrl());
-            $data[$key]->url = $banner;
+            $data[$key]->image = $banner;
             if($simple){
                 unset($data[$key]->media);
                 unset($data[$key]->start);
